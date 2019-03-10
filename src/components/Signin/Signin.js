@@ -14,12 +14,12 @@ class Signin extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    if (this.validateForm()) {         
-      this.setState({ Auth: true });
+    if (this.validateForm()) {
       this.setState({ loading: true });
-      this.props.handlerFromParant(true);
       setTimeout(() => {
         this.setState({ loading: false });
+        this.setState({ Auth: true });
+        this.props.handlerFromParant(true);
         toastr.success("Successful Login!");
       }, 2500);
     }
@@ -38,17 +38,12 @@ class Signin extends Component {
 
     if (validator.isEmail(email) == false) {
       formIsValid = false;
-      errors.push({ email: "Invalid Email!" });
+      errors.push({ email: "You must enter a valid email!" });
     }
 
-    if (password.length < 8) {
+    if (password.length < 8 || password.length == 0) {
       formIsValid = false;
       errors.push({ password: "Password must contain at least 9 letters!" });
-    }
-
-    if (password.length == 0) {
-      formIsValid = false;
-      errors.push({ password: "Password can't be null!" });
     }
 
     this.setState({
@@ -77,6 +72,23 @@ class Signin extends Component {
               />
               <span className="help-block" />
             </div>
+            {this.state.errors.map((element, i) => {
+              if (element.email) {
+                return (
+                  <div className="col-6">
+                    <div
+                      key={i}
+                      className="alert alert-danger mt-2 mb-1"
+                      role="alert"
+                    >
+                      <h6 className="text-sm m-0">{element.email}</h6>
+                    </div>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
           <div className="form-group">
             <div className="col-6">
@@ -90,6 +102,23 @@ class Signin extends Component {
                 onChange={this.handleChange}
               />
             </div>
+            {this.state.errors.map((element, i) => {
+              if (element.password) {
+                return (
+                  <div className="col-6">
+                    <div
+                      key={i}
+                      className="alert alert-danger mt-2 mb-1"
+                      role="alert"
+                    >
+                      <h6 className="text-sm m-0">{element.password}</h6>
+                    </div>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
             <span className="help-block" />
           </div>
           <div className="col-6">
