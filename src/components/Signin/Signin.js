@@ -70,7 +70,7 @@ class Signin extends Component {
                 name="email"
                 onChange={this.handleChange}
               />
-              <span className="help-block" />
+              <span className="help-block" value="fe" />
             </div>
             {this.state.errors.map((element, i) => {
               if (element.email) {

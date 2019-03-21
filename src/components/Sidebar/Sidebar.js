@@ -3,6 +3,7 @@ import Signin from "../Signin/Signin";
 import Jokes from "../Jokes/Jokes";
 import Bitcoin from "../Bitcoin/Bitcoin";
 import Home from "../Home/Home";
+
 import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
 import "./Sidebar.css";
 
@@ -62,6 +63,7 @@ class Sidebar extends Component {
               Toggle Menu
             </button>
           </nav>
+          
 
           <div className="container-fluid">
             <h1 className="mt-4">
